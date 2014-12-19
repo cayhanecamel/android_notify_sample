@@ -112,8 +112,8 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BigPickture"
-                android:id="@+id/bigPickture"/>
+                android:text="BigPicture"
+                android:id="@+id/bigPicture"/>
 
             <CheckBox
                 android:layout_width="wrap_content"

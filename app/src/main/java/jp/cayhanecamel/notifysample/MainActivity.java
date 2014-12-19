@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
         EditText contentText;
         EditText bigContentTitle;
         EditText summaryText;
-        CheckBox bigPickture;
+        CheckBox bigPicture;
         CheckBox wearableBackgroundImage;
 
         public PlaceholderFragment() {
@@ -85,7 +85,7 @@ public class MainActivity extends ActionBarActivity {
             contentText = (EditText) rootView.findViewById(R.id.contentText);
             bigContentTitle = (EditText) rootView.findViewById(R.id.bigContentTitle);
             summaryText = (EditText) rootView.findViewById(R.id.summaryText);
-            bigPickture = (CheckBox) rootView.findViewById(R.id.bigPickture);
+            bigPicture = (CheckBox) rootView.findViewById(R.id.bigPicture);
             wearableBackgroundImage = (CheckBox) rootView.findViewById(R.id.wearableBackgroundImage);
 
 
@@ -124,7 +124,7 @@ public class MainActivity extends ActionBarActivity {
             dto.id = 100;
 
             Resources r = App.get().getResources();
-            if (bigPickture.isChecked()) {
+            if (bigPicture.isChecked()) {
                 dto.bigPicture = BitmapFactory.decodeResource(r, R.drawable.big_picture);
             }
 
