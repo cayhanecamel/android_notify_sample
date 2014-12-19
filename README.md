@@ -1,2 +1,2 @@
-android_notify_exsample
+android_notify_sample
 =======================
