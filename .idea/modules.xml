@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NotifySample.iml" filepath="$PROJECT_DIR$/NotifySample.iml" />
       <module fileurl="file://$PROJECT_DIR$/android_notify_sample.iml" filepath="$PROJECT_DIR$/android_notify_sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
-

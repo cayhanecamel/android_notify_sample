@@ -42,18 +42,18 @@ public class NotificationUtil {
             builder.setTicker(dto.ticker);
         }
 
-
         // 写真設定
         NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
         if (dto.bigPicture != null) {
             bigPictureStyle.bigPicture(dto.bigPicture);
             if (dto.bigContentTitle != null) {
                 bigPictureStyle.setBigContentTitle(dto.bigContentTitle);
+                builder.setStyle(new NotificationCompat.BigTextStyle());
             }
             if (dto.summaryText != null) {
                 bigPictureStyle.setSummaryText(dto.summaryText);
             }
-            builder.setStyle(bigPictureStyle);
+//            builder.setStyle(bigPictureStyle);
 
         } else {
             if (dto.wearableBackgroundImage != null) {
