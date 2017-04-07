@@ -90,6 +90,7 @@
                 android:textColor="@color/txt_black01" />
 
             <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -109,11 +110,12 @@
 
                 <RadioButton
                     android:id="@+id/inboxRadio"
+                    android:enabled="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Inbox" />
-                
+
             </RadioGroup>
 
             <android.support.design.widget.TextInputLayout

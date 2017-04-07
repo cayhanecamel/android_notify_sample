@@ -38,12 +38,12 @@ class MainActivity : ActionBarActivity() {
                                   savedInstanceState: Bundle?): View {
             val rootView = inflater!!.inflate(R.layout.fragment_main, container, false)
 
-            rootView.findViewById(R.id.showNotification).setOnClickListener { showNotification2() }
+            rootView.findViewById(R.id.showNotification).setOnClickListener { showNotification() }
 
             return rootView
         }
 
-        private fun showNotification2() {
+        private fun showNotification() {
 
             // Intent の作成
             val contentIntent = PendingIntent.getActivity(
