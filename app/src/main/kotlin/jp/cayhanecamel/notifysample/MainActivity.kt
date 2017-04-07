@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarActivity
 import android.text.TextUtils
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_main.*
 
 
@@ -23,26 +25,6 @@ class MainActivity : ActionBarActivity() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-
-
-        if (id == R.id.action_settings) {
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -55,8 +37,6 @@ class MainActivity : ActionBarActivity() {
 
             rootView.findViewById(R.id.showNotification).setOnClickListener { showNotification() }
 
-
-
             return rootView
         }
 
@@ -65,43 +45,43 @@ class MainActivity : ActionBarActivity() {
             newIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             newIntent.putExtra("isLaunchByNotification", true)
 
-            val dto = NotificationDto()
+            val data = NotificationData()
 
             if (!TextUtils.isEmpty(ticker.text)) {
-                dto.ticker = ticker.text.toString()
+                data.ticker = ticker.text.toString()
             }
 
             if (!TextUtils.isEmpty(contentTitle.text)) {
-                dto.contentTitle = contentTitle.text.toString()
+                data.contentTitle = contentTitle.text.toString()
             }
 
             if (!TextUtils.isEmpty(contentText.text)) {
-                dto.contentText = contentText.text.toString()
+                data.contentText = contentText.text.toString()
             }
 
             if (!TextUtils.isEmpty(bigContentTitle.text)) {
-                dto.bigContentTitle = bigContentTitle.text.toString()
+                data.bigContentTitle = bigContentTitle.text.toString()
             }
 
             if (!TextUtils.isEmpty(summaryText.text)) {
-                dto.summaryText = summaryText.text.toString()
+                data.summaryText = summaryText.text.toString()
             }
 
 
-            dto.intent = newIntent
-            dto.id = 100
+            data.intent = newIntent
+            data.id = 100
 
             val r = App.get().resources
             if (bigPicture.isChecked) {
-                dto.bigPicture = BitmapFactory.decodeResource(r, R.drawable.big_picture)
+                data.bigPicture = BitmapFactory.decodeResource(r, R.drawable.big_picture)
             }
 
             if (wearableBackgroundImage.isChecked) {
-                dto.wearableBackgroundImage = BitmapFactory.decodeResource(r, R.drawable.wearable_background)
+                data.wearableBackgroundImage = BitmapFactory.decodeResource(r, R.drawable.wearable_background)
             }
 
 
-            NotificationUtil.show(dto)
+            NotificationUtil.show(data)
         }
     }
 }

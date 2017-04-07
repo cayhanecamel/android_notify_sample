@@ -10,14 +10,14 @@ import android.support.v4.app.NotificationManagerCompat
 
 object NotificationUtil {
 
-    fun show(dto: NotificationDto) {
+    fun show(data: NotificationData) {
 
         // Intent の作成
-        if (dto.intent == null) {
-            dto.intent = Intent(App.get(), MainActivity::class.java)
+        if (data.intent == null) {
+            data.intent = Intent(App.get(), MainActivity::class.java)
         }
         val contentIntent = PendingIntent.getActivity(
-                App.get(), dto.id, dto.intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                App.get(), data.id, data.intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         // LargeIcon の Bitmap を生成
         val largeIcon = BitmapFactory.decodeResource(App.get().resources, R.drawable.ic_launcher)
@@ -28,35 +28,35 @@ object NotificationUtil {
 
         builder.setSmallIcon(R.drawable.ic_launcher)
         builder.setLargeIcon(largeIcon)
-        if (dto.contentTitle != null) {
-            builder.setContentTitle(dto.contentTitle)
+        if (data.contentTitle != null) {
+            builder.setContentTitle(data.contentTitle)
         }
 
-        if (dto.contentText != null) {
-            builder.setContentText(dto.contentText)
+        if (data.contentText != null) {
+            builder.setContentText(data.contentText)
         }
 
-        if (dto.ticker != null) {
-            builder.setTicker(dto.ticker)
+        if (data.ticker != null) {
+            builder.setTicker(data.ticker)
         }
 
         // 写真設定
         val bigPictureStyle = NotificationCompat.BigPictureStyle()
-        if (dto.bigPicture != null) {
-            bigPictureStyle.bigPicture(dto.bigPicture)
-            if (dto.bigContentTitle != null) {
-                bigPictureStyle.setBigContentTitle(dto.bigContentTitle)
+        if (data.bigPicture != null) {
+            bigPictureStyle.bigPicture(data.bigPicture)
+            if (data.bigContentTitle != null) {
+                bigPictureStyle.setBigContentTitle(data.bigContentTitle)
                 builder.setStyle(NotificationCompat.BigTextStyle())
             }
-            if (dto.summaryText != null) {
-                bigPictureStyle.setSummaryText(dto.summaryText)
+            if (data.summaryText != null) {
+                bigPictureStyle.setSummaryText(data.summaryText)
             }
             //            builder.setStyle(bigPictureStyle);
 
         } else {
-            if (dto.wearableBackgroundImage != null) {
+            if (data.wearableBackgroundImage != null) {
                 val wearableExtender = NotificationCompat.WearableExtender()
-                wearableExtender.background = dto.wearableBackgroundImage
+                wearableExtender.background = data.wearableBackgroundImage
                 builder.extend(wearableExtender)
             }
         }
@@ -71,7 +71,7 @@ object NotificationUtil {
         // NotificationManagerを取得
         val notificationManager = NotificationManagerCompat.from(App.get())
         // Notificationを作成して通知
-        notificationManager.notify(dto.id, builder.build())
+        notificationManager.notify(data.id, builder.build())
 
     }
 }
