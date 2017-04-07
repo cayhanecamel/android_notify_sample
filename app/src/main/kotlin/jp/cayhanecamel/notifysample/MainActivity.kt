@@ -1,11 +1,14 @@
 package jp.cayhanecamel.notifysample
 
+import android.app.Notification
+import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.NotificationCompat
+import android.support.v4.app.NotificationManagerCompat
 import android.support.v7.app.ActionBarActivity
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,53 +38,80 @@ class MainActivity : ActionBarActivity() {
                                   savedInstanceState: Bundle?): View {
             val rootView = inflater!!.inflate(R.layout.fragment_main, container, false)
 
-            rootView.findViewById(R.id.showNotification).setOnClickListener { showNotification() }
+            rootView.findViewById(R.id.showNotification).setOnClickListener { showNotification2() }
 
             return rootView
         }
 
-        private fun showNotification() {
-            val newIntent = Intent(App.get(), MainActivity::class.java)
-            newIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            newIntent.putExtra("isLaunchByNotification", true)
+        private fun showNotification2() {
 
-            val data = NotificationData()
+            // Intent の作成
+            val contentIntent = PendingIntent.getActivity(
+                    App.get(),
+                    1000,
+                    Intent(App.get(), MainActivity::class.java),
+                    PendingIntent.FLAG_UPDATE_CURRENT)
 
-            if (!TextUtils.isEmpty(ticker.text)) {
-                data.ticker = ticker.text.toString()
+            // LargeIcon の Bitmap を生成
+            val largeIcon = BitmapFactory.decodeResource(App.get().resources, R.drawable.ic_launcher)
+
+            // NotificationBuilderを作成
+            val builder = NotificationCompat.Builder(App.get())
+            builder.setContentIntent(contentIntent)
+
+            builder.setSmallIcon(R.drawable.ic_launcher)
+            builder.setLargeIcon(largeIcon)
+
+            if (contentTitle.text.isNotEmpty()) {
+                builder.setContentTitle(contentTitle.text)
             }
 
-            if (!TextUtils.isEmpty(contentTitle.text)) {
-                data.contentTitle = contentTitle.text.toString()
+            if (contentText.text.isNotEmpty()) {
+                builder.setContentText(contentText.text)
             }
 
-            if (!TextUtils.isEmpty(contentText.text)) {
-                data.contentText = contentText.text.toString()
+            if (ticker.text.isNotEmpty()) {
+                builder.setTicker(ticker.text)
             }
 
-            if (!TextUtils.isEmpty(bigContentTitle.text)) {
-                data.bigContentTitle = bigContentTitle.text.toString()
+            if (bigPictureRadio.isChecked) {
+                val r = App.get().resources
+                val style = NotificationCompat.BigPictureStyle()
+                style.bigPicture(BitmapFactory.decodeResource(r, R.drawable.big_picture))
+                if (summaryText.text.isNotEmpty()) {
+                    style.setSummaryText(summaryText.text)
+                }
+                builder.setStyle(style)
+
+            } else if (bigTextRadio.isChecked) {
+                val style = NotificationCompat.BigTextStyle()
+                if (bigContentTitle.text.isNotEmpty()) {
+                    style.setBigContentTitle(bigContentTitle.text)
+                }
+                if (summaryText.text.isNotEmpty()) {
+                    style.setSummaryText(summaryText.text)
+                }
+
+                builder.setStyle(style)
+
+            } else if (inboxRadio.isChecked) {
+
             }
 
-            if (!TextUtils.isEmpty(summaryText.text)) {
-                data.summaryText = summaryText.text.toString()
-            }
+
+            // 通知するタイミング
+            builder.setWhen(System.currentTimeMillis())
+            // 通知時の音・バイブ・ライト
+            builder.setDefaults(Notification.DEFAULT_SOUND or Notification.DEFAULT_VIBRATE or Notification.DEFAULT_LIGHTS)
+            builder.setAutoCancel(true)
 
 
-            data.intent = newIntent
-            data.id = 100
+            // NotificationManagerを取得
+            val notificationManager = NotificationManagerCompat.from(App.get())
+            // Notificationを作成して通知
+            notificationManager.notify(1000, builder.build())
 
-            val r = App.get().resources
-            if (bigPicture.isChecked) {
-                data.bigPicture = BitmapFactory.decodeResource(r, R.drawable.big_picture)
-            }
-
-            if (wearableBackgroundImage.isChecked) {
-                data.wearableBackgroundImage = BitmapFactory.decodeResource(r, R.drawable.wearable_background)
-            }
-
-
-            NotificationUtil.show(data)
         }
+
     }
 }
