@@ -49,7 +49,7 @@ class MainActivity : ActionBarActivity() {
             val contentIntent = PendingIntent.getActivity(
                     App.get(),
                     1000,
-                    Intent(App.get(), MainActivity::class.java),
+                    Intent(App.get(), NextActivity::class.java),
                     PendingIntent.FLAG_UPDATE_CURRENT)
 
             // LargeIcon の Bitmap を生成
@@ -91,7 +91,9 @@ class MainActivity : ActionBarActivity() {
                 if (summaryText.text.isNotEmpty()) {
                     style.setSummaryText(summaryText.text)
                 }
-
+                if(bigText.text.isNotEmpty()){
+                    style.bigText(bigText.text)
+                }
                 builder.setStyle(style)
 
             } else if (inboxRadio.isChecked) {

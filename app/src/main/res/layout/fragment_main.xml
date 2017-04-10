@@ -139,6 +139,21 @@
                 android:layout_marginTop="40dp">
 
                 <EditText
+                    android:id="@+id/bigText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="BigText"
+                    android:text="BigText"
+                    android:textColor="@color/txt_black01" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp">
+
+                <EditText
                     android:id="@+id/summaryText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
