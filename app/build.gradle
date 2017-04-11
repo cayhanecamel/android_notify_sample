@@ -7,7 +7,7 @@ android {
     buildToolsVersion "25.0.1"
 
     defaultConfig {
-        applicationId "jp.cayhanecamel.notifysample"
+        applicationId "jp.cayhanecamel.pushtester"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1

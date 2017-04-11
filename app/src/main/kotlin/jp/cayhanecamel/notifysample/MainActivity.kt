@@ -97,7 +97,11 @@ class MainActivity : ActionBarActivity() {
                 builder.setStyle(style)
 
             } else if (inboxRadio.isChecked) {
-
+                val style = NotificationCompat.InboxStyle()
+                addLine.text.split("\n").forEach { line ->
+                    style.addLine(line)
+                }
+                builder.setStyle(style)
             }
 
 

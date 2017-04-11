@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,8 +9,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity$PlaceholderFragment">
 
+    <RelativeLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/showNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Push!!" />
+
+    </RelativeLayout>
+
     <ScrollView
         android:id="@+id/scrollView"
+        android:layout_above="@id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,17 +38,11 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/showNotification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="show notification" />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="↓↓notification options↓↓"
+                android:text="Notification Options"
                 android:textColor="@color/txt_black01" />
 
             <android.support.design.widget.TextInputLayout
@@ -95,6 +108,13 @@
                 android:layout_height="match_parent">
 
                 <RadioButton
+                    android:id="@+id/noneRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="None" />
+
+                <RadioButton
                     android:id="@+id/bigPictureRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,7 +130,6 @@
 
                 <RadioButton
                     android:id="@+id/inboxRadio"
-                    android:enabled="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -129,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="BigContentTitle"
-                    android:text="BigContentTitle"
+                    android:text="BigContentTitle1BigContentTitle2BigContentTitle3BigContentTitle4"
                     android:textColor="@color/txt_black01" />
             </android.support.design.widget.TextInputLayout>
 
@@ -144,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="BigText"
-                    android:text="BigText"
+                    android:text="BigText1BigText2BigText3BigText4BigText5BigText6BigText7BigText8BigText9BigText0"
                     android:textColor="@color/txt_black01" />
             </android.support.design.widget.TextInputLayout>
 
@@ -160,6 +179,21 @@
                     android:layout_marginTop="10dp"
                     android:hint="SummaryText"
                     android:text="SummaryText"
+                    android:textColor="@color/txt_black01" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp">
+
+                <EditText
+                    android:id="@+id/addLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="addLine"
+                    android:text=""
                     android:textColor="@color/txt_black01" />
             </android.support.design.widget.TextInputLayout>
 
@@ -179,4 +213,7 @@
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+
+
+
+</RelativeLayout>
