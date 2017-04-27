@@ -30,9 +30,9 @@
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_above="@id/buttonLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/buttonLayout">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -45,7 +45,6 @@
                 android:layout_marginTop="10dp"
                 android:text="Notification Options"
                 android:textColor="@color/txt_black01" />
-
 
 
             <android.support.design.widget.TextInputLayout
@@ -192,6 +191,12 @@
                     android:textColor="@color/txt_black01" />
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Big Picture"
+                android:textColor="@color/txt_black01" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -207,8 +212,8 @@
                     android:id="@+id/bigPicture"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    app:srcCompat="@drawable/big_picture"
-                    android:layout_below="@id/imagePickbutton" />
+                    android:layout_below="@id/imagePickbutton"
+                    app:srcCompat="@drawable/big_picture" />
             </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -241,8 +246,6 @@
 
         </LinearLayout>
     </ScrollView>
-
-
 
 
 </RelativeLayout>
