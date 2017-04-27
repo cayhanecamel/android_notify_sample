@@ -10,6 +10,11 @@ import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.bumptech.glide.Glide
 import com.esafirm.imagepicker.features.ImagePicker
 import com.esafirm.imagepicker.model.Image
@@ -22,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     val PICK_UP_PHOTO = 1
 
     var imagePath = ""
+
+    var currentStyle = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         bigText.setText(sp.getString("big_text", "big_textttttttttttttttttttttttttttttttttttttttttttttttt"))
         summaryText.setText(sp.getString("summary_text", "summary_texttttttttttttttttttttttttttttt"))
         imagePath = sp.getString("image_path", "")
-        radioGroup.check(sp.getInt("style", R.id.noneRadio))
 
         if (imagePath.isNotEmpty()) {
             Glide.with(App.get())
@@ -62,6 +68,52 @@ class MainActivity : AppCompatActivity() {
             showNotification()
         }
 
+        val spinnerItems = arrayOf("None", "Big Picture", "Big Text", "Inbox")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerItems)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        styleSpinner.adapter = adapter
+
+
+        styleSpinner.setOnItemSelectedListener(object : OnItemSelectedListener {
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val spinner = parent as Spinner
+                val item = spinner.selectedItem as String
+
+                if (item == "None") {
+                    currentStyle = 0
+                } else if (item == "Big Picture") {
+                    currentStyle = 1
+                    bigPictureLayout.visibility = View.VISIBLE
+                    summaryLayout.visibility = View.VISIBLE
+                    bigContentLayout.visibility = View.GONE
+                    bigTextLayout.visibility = View.GONE
+                    addLineLayout.visibility = View.GONE
+
+
+                } else if (item == "Big Text") {
+                    currentStyle = 2
+                    bigPictureLayout.visibility = View.GONE
+                    summaryLayout.visibility = View.VISIBLE
+                    bigContentLayout.visibility = View.VISIBLE
+                    bigTextLayout.visibility = View.VISIBLE
+                    addLineLayout.visibility = View.GONE
+
+                } else if (item == "Inbox") {
+                    currentStyle = 3
+                    bigPictureLayout.visibility = View.GONE
+                    summaryLayout.visibility = View.GONE
+                    bigContentLayout.visibility = View.GONE
+                    bigTextLayout.visibility = View.GONE
+                    addLineLayout.visibility = View.VISIBLE
+
+                }
+            }
+
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        })
+        styleSpinner.setSelection(sp.getInt("style", 0))
 
     }
 
@@ -98,7 +150,7 @@ class MainActivity : AppCompatActivity() {
             builder.setTicker(ticker.text)
         }
 
-        if (bigPictureRadio.isChecked) {
+        if (currentStyle == 1) {
             val r = App.get().resources
             val style = NotificationCompat.BigPictureStyle()
 
@@ -109,13 +161,14 @@ class MainActivity : AppCompatActivity() {
                 style.bigPicture(BitmapFactory.decodeResource(r, R.drawable.big_picture))
             }
 
-
             if (summaryText.text.isNotEmpty()) {
                 style.setSummaryText(summaryText.text)
             }
             builder.setStyle(style)
 
-        } else if (bigTextRadio.isChecked) {
+
+
+        } else if (currentStyle == 2) {
             val style = NotificationCompat.BigTextStyle()
             if (bigContentTitle.text.isNotEmpty()) {
                 style.setBigContentTitle(bigContentTitle.text)
@@ -128,7 +181,10 @@ class MainActivity : AppCompatActivity() {
             }
             builder.setStyle(style)
 
-        } else if (inboxRadio.isChecked) {
+
+
+
+        } else if (currentStyle == 3) {
             val style = NotificationCompat.InboxStyle()
             addLine.text.split("\n").forEach { line ->
                 style.addLine(line)
@@ -165,7 +221,7 @@ class MainActivity : AppCompatActivity() {
         sp.edit().putString("big_text", bigText.text.toString()).commit()
         sp.edit().putString("summary_text", summaryText.text.toString()).commit()
         sp.edit().putString("image_path", imagePath).commit()
-        sp.edit().putInt("style", radioGroup.checkedRadioButtonId).commit()
+        sp.edit().putInt("style", currentStyle).commit()
     }
 
 
