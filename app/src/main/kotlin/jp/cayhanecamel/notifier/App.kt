@@ -1,4 +1,4 @@
-package jp.cayhanecamel.notifysample
+package jp.cayhanecamel.notifier
 
 import android.app.Application
 

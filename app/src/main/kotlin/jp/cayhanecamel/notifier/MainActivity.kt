@@ -1,10 +1,11 @@
-package jp.cayhanecamel.notifysample
+package jp.cayhanecamel.notifier
 
 import android.app.Notification
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
@@ -19,7 +20,7 @@ class MainActivity : ActionBarActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(jp.cayhanecamel.notifysample.R.layout.activity_main)
+        setContentView(jp.cayhanecamel.notifier.R.layout.activity_main)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .add(R.id.container, PlaceholderFragment())
@@ -40,7 +41,23 @@ class MainActivity : ActionBarActivity() {
 
             rootView.findViewById(R.id.showNotification).setOnClickListener { showNotification() }
 
+
+
             return rootView
+        }
+
+        override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+            super.onViewCreated(view, savedInstanceState)
+
+
+            val sp = PreferenceManager.getDefaultSharedPreferences(App.get())
+
+            contentTitle.setText(sp.getString("content_title", "content_title"))
+            contentText.setText(sp.getString("content_text", "content_text"))
+            ticker.setText(sp.getString("ticker", "ticker"))
+            bigContentTitle.setText(sp.getString("big_content_title", "big_content_titleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"))
+            bigText.setText(sp.getString("big_text", "big_textttttttttttttttttttttttttttttttttttttttttttttttt"))
+            summaryText.setText(sp.getString("summary_text", "summary_texttttttttttttttttttttttttttttt"))
         }
 
         private fun showNotification() {
@@ -91,7 +108,7 @@ class MainActivity : ActionBarActivity() {
                 if (summaryText.text.isNotEmpty()) {
                     style.setSummaryText(summaryText.text)
                 }
-                if(bigText.text.isNotEmpty()){
+                if (bigText.text.isNotEmpty()) {
                     style.bigText(bigText.text)
                 }
                 builder.setStyle(style)
@@ -117,6 +134,21 @@ class MainActivity : ActionBarActivity() {
             // Notificationを作成して通知
             notificationManager.notify(1000, builder.build())
 
+        }
+
+        override fun onPause() {
+            super.onPause()
+            save()
+        }
+
+        private fun save() {
+            val sp = PreferenceManager.getDefaultSharedPreferences(App.get())
+            sp.edit().putString("content_title", contentTitle.text.toString()).commit()
+            sp.edit().putString("content_text", contentText.text.toString()).commit()
+            sp.edit().putString("ticker", ticker.text.toString()).commit()
+            sp.edit().putString("big_content_title", bigContentTitle.text.toString()).commit()
+            sp.edit().putString("big_text", bigText.text.toString()).commit()
+            sp.edit().putString("summary_text", summaryText.text.toString()).commit()
         }
 
     }

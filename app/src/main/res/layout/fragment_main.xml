@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="ContentTitles"
+                    android:hint="ContentTitle"
                     android:text="ContentTitle"
                     android:textColor="@color/txt_black01" />
             </android.support.design.widget.TextInputLayout>
