@@ -82,6 +82,12 @@ class MainActivity : AppCompatActivity() {
 
                 if (item == "None") {
                     currentStyle = 0
+                    bigPictureLayout.visibility = View.GONE
+                    summaryLayout.visibility = View.GONE
+                    bigContentLayout.visibility = View.GONE
+                    bigTextLayout.visibility = View.GONE
+                    addLineLayout.visibility = View.GONE
+
                 } else if (item == "Big Picture") {
                     currentStyle = 1
                     bigPictureLayout.visibility = View.VISIBLE
@@ -167,7 +173,6 @@ class MainActivity : AppCompatActivity() {
             builder.setStyle(style)
 
 
-
         } else if (currentStyle == 2) {
             val style = NotificationCompat.BigTextStyle()
             if (bigContentTitle.text.isNotEmpty()) {
@@ -180,8 +185,6 @@ class MainActivity : AppCompatActivity() {
                 style.bigText(bigText.text)
             }
             builder.setStyle(style)
-
-
 
 
         } else if (currentStyle == 3) {
