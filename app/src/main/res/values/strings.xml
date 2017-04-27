@@ -4,5 +4,7 @@
     <string name="app_name">Notifier</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="pick_image">pick image</string>
+    <string name="profile_choose_photo" format="false">Please select one image</string>
 
 </resources>
