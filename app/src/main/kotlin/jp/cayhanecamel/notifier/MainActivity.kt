@@ -70,11 +70,11 @@ class MainActivity : AppCompatActivity() {
 
         val spinnerItems = arrayOf("None", "Big Picture", "Big Text", "Inbox")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerItems)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         styleSpinner.adapter = adapter
 
 
-        styleSpinner.setOnItemSelectedListener(object : OnItemSelectedListener {
+        styleSpinner.onItemSelectedListener = object : OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val spinner = parent as Spinner
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
-        })
+        }
         styleSpinner.setSelection(sp.getInt("style", 0))
 
     }
