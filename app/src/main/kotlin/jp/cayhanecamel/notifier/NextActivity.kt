@@ -1,10 +1,10 @@
 package jp.cayhanecamel.notifier
 
 import android.os.Bundle
-import android.support.v7.app.ActionBarActivity
+import android.support.v7.app.AppCompatActivity
 
 
-class NextActivity : ActionBarActivity() {
+class NextActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
